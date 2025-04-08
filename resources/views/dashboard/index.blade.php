@@ -83,9 +83,15 @@
                 <tbody>
                     @forelse($recentLateBorrowings as $borrowing)
                         <tr class="border-b hover:bg-gray-50">
-                            <td class="py-2 px-4 font-medium">{{ $borrowing->book->title }}</td>
-                            <td class="py-2 px-4">{{ $borrowing->user->name }}</td>
-                            <td class="py-2 px-4">{{ $borrowing->due_date->format('d/m/Y') }}</td>
+                            <td class="py-2 px-4 font-medium">
+                                {{ $borrowing->book?->title ?? 'Livre inconnu' }}
+                            </td>
+                            <td class="py-2 px-4">
+                                {{ $borrowing->user?->name ?? 'Utilisateur inconnu' }}
+                            </td>
+                            <td class="py-2 px-4">
+                                {{ optional($borrowing->due_date)->format('d/m/Y') ?? 'Date non définie' }}
+                            </td>
                         </tr>
                     @empty
                         <tr>
